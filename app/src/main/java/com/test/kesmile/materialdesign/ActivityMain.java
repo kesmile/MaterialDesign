@@ -1,33 +1,58 @@
 package com.test.kesmile.materialdesign;
 
-import android.os.Handler;
+import android.graphics.Color;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+
+import com.test.kesmile.materialdesign.adapters.PagerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ActivityMain extends ActionBarActivity {
+    private List<Fragment> fragments = new ArrayList<Fragment>();
+    private ViewPager mViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_test);
+      //  Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
+      //  setSupportActionBar(toolbar);
 
-        /*if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new FragmentMain())
-                    .commit();
-        }*/
-        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
-        setSupportActionBar(toolbar);
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(),fragments);
+        if (savedInstanceState == null) {
+            fragments.add(new FragmentMainTest());
+            fragments.add(new FragmentMainTest());
+        }else{
+            FragmentManager fragManager = getSupportFragmentManager();
+            fragments.add(fragManager.findFragmentByTag(adapter.getFragmentTag(0)));
+            fragments.add(fragManager.findFragmentByTag(adapter.getFragmentTag(1)));
+        }
+        adapter.notifyDataSetChanged();
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(2);
+
+        PagerTabStrip strip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
+        strip.setDrawFullUnderline(true);
+
+        strip.setTabIndicatorColor(getResources().getColor(R.color.color_primary_dark));
+        strip.setTextColor(getResources().getColor(R.color.color_primary_dark));
+        // strip.setBackgroundColor(#E6E6E6);
+        strip.setNonPrimaryAlpha(0.5f);
+        strip.setTextSpacing(25);
+        strip.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+
     }
 
 
