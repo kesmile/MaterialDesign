@@ -1,6 +1,5 @@
 package com.test.kesmile.materialdesign;
 
-import android.graphics.Color;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
@@ -12,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.test.kesmile.materialdesign.adapters.PagerAdapter;
+import com.test.kesmile.materialdesign.fragments.FragmentMainTest;
 
 import java.util.ArrayList;
 import java.util.List;
