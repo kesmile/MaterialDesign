@@ -32,23 +32,20 @@ public class ActivityMain extends ActionBarActivity {
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(),fragments);
         if (savedInstanceState == null) {
             fragments.add(new FragmentMainTest());
-            fragments.add(new FragmentMainTest());
         }else{
             FragmentManager fragManager = getSupportFragmentManager();
             fragments.add(fragManager.findFragmentByTag(adapter.getFragmentTag(0)));
-            fragments.add(fragManager.findFragmentByTag(adapter.getFragmentTag(1)));
         }
         adapter.notifyDataSetChanged();
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(adapter);
-        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setOffscreenPageLimit(1);
 
         PagerTabStrip strip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
         strip.setDrawFullUnderline(true);
 
         strip.setTabIndicatorColor(getResources().getColor(R.color.color_primary_dark));
         strip.setTextColor(getResources().getColor(R.color.color_primary_dark));
-        // strip.setBackgroundColor(#E6E6E6);
         strip.setNonPrimaryAlpha(0.5f);
         strip.setTextSpacing(25);
         strip.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
