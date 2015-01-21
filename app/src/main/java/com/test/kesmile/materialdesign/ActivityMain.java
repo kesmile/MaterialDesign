@@ -9,8 +9,13 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
+import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 import com.test.kesmile.materialdesign.adapters.PagerAdapter;
+import com.test.kesmile.materialdesign.fragments.Bluetooth;
 import com.test.kesmile.materialdesign.fragments.FragmentMainTest;
 
 import java.util.ArrayList;
@@ -29,17 +34,38 @@ public class ActivityMain extends ActionBarActivity {
       //  Toolbar toolbar = (Toolbar) findViewById(R.id.activity_my_toolbar);
       //  setSupportActionBar(toolbar);
 
+        ImageView icon = new ImageView(this); // Create an icon
+        icon.setImageDrawable( getResources().getDrawable(android.R.drawable.ic_dialog_alert));
+        icon.setBackgroundColor( getResources().getColor(R.color.color_primary_dark) );
+        FloatingActionButton actionButton = new FloatingActionButton.Builder(this)
+                .setContentView(icon)
+                .build();
+
+        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+        ImageView itemIcon = new ImageView(this);
+        itemIcon.setImageDrawable( getResources().getDrawable(android.R.drawable.ic_dialog_alert));
+        SubActionButton button1 = itemBuilder.setContentView(itemIcon).build();
+
+
+        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
+                .addSubActionView(button1)
+                .attachTo(actionButton)
+                .build();
+
+
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(),fragments);
         if (savedInstanceState == null) {
             fragments.add(new FragmentMainTest());
+            fragments.add(new Bluetooth());
         }else{
             FragmentManager fragManager = getSupportFragmentManager();
             fragments.add(fragManager.findFragmentByTag(adapter.getFragmentTag(0)));
+            fragments.add(fragManager.findFragmentByTag(adapter.getFragmentTag(1)));
         }
         adapter.notifyDataSetChanged();
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(adapter);
-        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.setOffscreenPageLimit(2);
 
         PagerTabStrip strip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
         strip.setDrawFullUnderline(true);

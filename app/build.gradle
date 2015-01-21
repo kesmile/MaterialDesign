@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.test.kesmile.materialdesign"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -31,4 +31,8 @@ dependencies {
     compile 'com.getbase:floatingactionbutton:1.5.1'
     //Libreria para agregar un Floating Action Button
     compile 'de.hdodenhof:circleimageview:1.2.1'
+    //libreria
+    compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
+
+    compile 'com.skyfishjy.ripplebackground:library:1.0.1'
 }
